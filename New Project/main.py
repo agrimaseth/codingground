@@ -1,6 +1,6 @@
 import string
 import re
-import nltk
+
 with open('Newfile.py', 'r') as f, open('out.txt', 'w') as out:
  read_data = f.read()
  tokens=[e.lower() for e in map(string.strip, re.split("(\W+)", read_data)) if len(e) > 0 and not re.match("\W",e)]
