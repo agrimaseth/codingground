@@ -1,19 +1,28 @@
 import string
 import re
 
-with open('Newfile.py', 'r') as f, open('out.txt', 'w') as out:
+with open('Newfile.py', 'r') as f, open ('query.py','r') as q, open('out.txt', 'w') as out:
+ 
+ read_query = q.read()
+ query_list = read_query.split()
+ 
  read_data = f.read()
  tokens=[e.lower() for e in map(string.strip, re.split("(\W+)", read_data)) if len(e) > 0 and not re.match("\W",e)]
- indices = (i for i,word in enumerate(tokens) if word=="place")
- neighbors = []
- for ind in indices:
-  neighbors.append(tokens[ind-3:ind]+tokens[ind+1:ind+4])
- for line in neighbors:
-        strs="\n".join(str(x)+" place" + "l1" for x in line)
+ 
+ for query in query_list:
+    print query
+    indices = (i for i,word in enumerate(tokens) if word==query)
+    neighbors = []
+    for ind in indices:
+     neighbors.append(tokens[ind-3:ind]+tokens[ind+1:ind+4])
+    for line in neighbors:
+        strs="\n".join(str(x)+" "+ query + " l1" for x in line)
         out.write(strs+"\n")
       
-print neighbors
+    print neighbors
+    
 f.close()
+q.close()
 out.close()
 #print out.closed
 print f.closed
