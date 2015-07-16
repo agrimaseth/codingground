@@ -1,1 +1,1 @@
-snow palace
+snow place
